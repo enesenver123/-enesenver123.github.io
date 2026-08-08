@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ezgi Ne Zaman Dönüyor? ❤️</title>
+  <meta name="description" content="Ezgi'nin dönüşüne kalan süre.">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #fff;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 105, 145, .22), transparent 30%),
+        radial-gradient(circle at 80% 75%, rgba(184, 85, 255, .18), transparent 32%),
+        linear-gradient(145deg, #160b18 0%, #26101f 48%, #100912 100%);
+      overflow: hidden;
+    }
+    .stars, .stars::before, .stars::after {
+      position: fixed; inset: 0; content: "";
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,190,215,.45) 1px, transparent 1px);
+      background-size: 90px 90px, 140px 140px;
+      background-position: 10px 20px, 40px 70px;
+      opacity: .25;
+      pointer-events: none;
+    }
+    .stars::before { transform: translate(30px, 45px); opacity: .18; }
+    .container {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px 18px;
+      position: relative;
+    }
+    .card {
+      width: min(920px, 100%);
+      text-align: center;
+      padding: 52px 28px 42px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 32px;
+      background: rgba(255,255,255,.065);
+      box-shadow: 0 30px 100px rgba(0,0,0,.38);
+      backdrop-filter: blur(16px);
+    }
+    .heart {
+      font-size: 38px;
+      animation: pulse 1.7s infinite;
+      margin-bottom: 10px;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.13); }
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      font-size: 12px;
+      opacity: .68;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      font-size: clamp(38px, 7vw, 72px);
+      line-height: 1.05;
+    }
+    h1 span { color: #ff9fbd; }
+    .subtitle {
+      margin: 18px auto 36px;
+      max-width: 580px;
+      font-size: 16px;
+      line-height: 1.6;
+      opacity: .76;
+    }
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 760px;
+      margin: 0 auto 30px;
+    }
+    .unit {
+      padding: 22px 10px;
+      border-radius: 20px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .number {
+      font-size: clamp(32px, 6vw, 58px);
+      font-weight: 700;
+      letter-spacing: -.04em;
+      font-variant-numeric: tabular-nums;
+    }
+    .label {
+      margin-top: 5px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      opacity: .52;
+    }
+    .date {
+      font-size: 14px;
+      opacity: .55;
+      margin-bottom: 28px;
+    }
+    .message {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 999px;
+      background: rgba(255,159,189,.11);
+      border: 1px solid rgba(255,159,189,.18);
+      color: #ffc2d5;
+      font-size: 14px;
+    }
+    .footer {
+      margin-top: 28px;
+      font-size: 11px;
+      opacity: .35;
+      letter-spacing: .08em;
+    }
+    @media (max-width: 600px) {
+      .card { padding: 42px 16px 32px; border-radius: 25px; }
+      .countdown { gap: 7px; }
+      .unit { padding: 17px 5px; border-radius: 15px; }
+      .label { letter-spacing: .08em; font-size: 9px; }
+    }
+    @media (max-width: 390px) {
+      .number { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <main class="container">
+    <section class="card">
+      <div class="heart">❤️</div>
+      <div class="eyebrow">Buluşmaya kalan süre</div>
+      <h1><span>Ezgi</span> ne zaman dönüyor?</h1>
+      <p class="subtitle">
+        Kavuşmaya çok az kaldı. Bu sayaç, 28 Ağustos 2026 saat 12:00'ye
+        kadar her saniye geri sayıyor.
+      </p>
+
+      <div class="countdown" aria-label="Geri sayım">
+        <div class="unit"><div class="number" id="days">00</div><div class="label">Gün</div></div>
+        <div class="unit"><div class="number" id="hours">00</div><div class="label">Saat</div></div>
+        <div class="unit"><div class="number" id="minutes">00</div><div class="label">Dakika</div></div>
+        <div class="unit"><div class="number" id="seconds">00</div><div class="label">Saniye</div></div>
+      </div>
+
+      <div class="date">28 Ağustos 2026 · 12:00</div>
+      <div class="message" id="message">Az kaldı... ❤️</div>
+      <div class="footer">sadece ikiniz için</div>
+    </section>
+  </main>
+
+  <script>
+    // Hedef: 28 Ağustos 2026, saat 12:00 (Türkiye saati)
+    const target = new Date("2026-08-28T12:00:00+03:00").getTime();
+
+    const $ = id => document.getElementById(id);
+    const pad = n => String(n).padStart(2, "0");
+
+    function updateCountdown() {
+      const diff = target - Date.now();
+
+      if (diff <= 0) {
+        $("days").textContent = "00";
+        $("hours").textContent = "00";
+        $("minutes").textContent = "00";
+        $("seconds").textContent = "00";
+        $("message").textContent = "EZGİ DÖNDÜ! ❤️";
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      $("days").textContent = pad(days);
+      $("hours").textContent = pad(hours);
+      $("minutes").textContent = pad(minutes);
+      $("seconds").textContent = pad(seconds);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>

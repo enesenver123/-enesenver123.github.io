@@ -3,194 +3,868 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Ezgi Ne Zaman Dönüyor? ❤️</title>
-  <meta name="description" content="Ezgi'nin dönüşüne kalan süre.">
+
   <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #fff;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255, 105, 145, .22), transparent 30%),
-        radial-gradient(circle at 80% 75%, rgba(184, 85, 255, .18), transparent 32%),
-        linear-gradient(145deg, #160b18 0%, #26101f 48%, #100912 100%);
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
       overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: white;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(255, 80, 130, 0.20),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 80% 80%,
+          rgba(180, 60, 220, 0.16),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          #120812 0%,
+          #260d1d 50%,
+          #0c0710 100%
+        );
     }
-    .stars, .stars::before, .stars::after {
-      position: fixed; inset: 0; content: "";
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,190,215,.45) 1px, transparent 1px);
-      background-size: 90px 90px, 140px 140px;
-      background-position: 10px 20px, 40px 70px;
-      opacity: .25;
+
+    /* ARKA PLAN KALPLERİ */
+
+    .background-hearts {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
       pointer-events: none;
+      z-index: 1;
     }
-    .stars::before { transform: translate(30px, 45px); opacity: .18; }
-    .container {
+
+    .background-hearts span {
+      position: absolute;
+      bottom: -50px;
+      opacity: 0.2;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 0.25;
+      }
+
+      100% {
+        transform: translateY(-115vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    /* ANA EKRAN */
+
+    .countdown-screen {
       min-height: 100vh;
       display: grid;
       place-items: center;
-      padding: 28px 18px;
+      padding: 20px;
       position: relative;
+      z-index: 2;
     }
+
     .card {
-      width: min(920px, 100%);
+      width: min(900px, 100%);
       text-align: center;
-      padding: 52px 28px 42px;
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 32px;
-      background: rgba(255,255,255,.065);
-      box-shadow: 0 30px 100px rgba(0,0,0,.38);
+
+      padding: 42px 24px 36px;
+
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 30px;
+
+      background: rgba(255, 255, 255, 0.065);
+
+      box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.45);
+
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
-    .heart {
-      font-size: 38px;
-      animation: pulse 1.7s infinite;
-      margin-bottom: 10px;
+
+    .top-heart {
+      font-size: 40px;
+      animation: pulse 1.6s infinite;
     }
+
     @keyframes pulse {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.13); }
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
     }
+
     .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: .24em;
-      font-size: 12px;
-      opacity: .68;
+      margin-top: 8px;
       margin-bottom: 12px;
+
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+
+      font-size: 11px;
+      opacity: 0.58;
     }
+
     h1 {
       margin: 0;
+
       font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 7vw, 70px);
       font-weight: 500;
-      font-size: clamp(38px, 7vw, 72px);
       line-height: 1.05;
     }
-    h1 span { color: #ff9fbd; }
-    .subtitle {
-      margin: 18px auto 36px;
-      max-width: 580px;
-      font-size: 16px;
-      line-height: 1.6;
-      opacity: .76;
+
+    h1 span {
+      color: #ff9fbd;
     }
+
+    .subtitle {
+      max-width: 600px;
+
+      margin: 18px auto 30px;
+
+      font-size: 15px;
+      line-height: 1.6;
+
+      opacity: 0.72;
+    }
+
+    .target-date {
+      display: inline-block;
+
+      padding: 10px 17px;
+
+      border-radius: 999px;
+
+      background: rgba(255, 159, 189, 0.08);
+      border: 1px solid rgba(255, 159, 189, 0.16);
+
+      color: #ffc1d3;
+
+      font-size: 13px;
+
+      margin-bottom: 26px;
+    }
+
+    /* SAYAÇ */
+
     .countdown {
       display: grid;
+
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+
+      gap: 10px;
+
       max-width: 760px;
-      margin: 0 auto 30px;
+
+      margin: 0 auto 26px;
     }
-    .unit {
-      padding: 22px 10px;
-      border-radius: 20px;
-      background: rgba(0,0,0,.18);
-      border: 1px solid rgba(255,255,255,.08);
+
+    .time-box {
+      padding: 20px 8px;
+
+      border-radius: 19px;
+
+      background: rgba(0, 0, 0, 0.20);
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
+
     .number {
-      font-size: clamp(32px, 6vw, 58px);
+      font-size: clamp(31px, 6vw, 58px);
+
       font-weight: 700;
-      letter-spacing: -.04em;
+
+      letter-spacing: -0.04em;
+
       font-variant-numeric: tabular-nums;
     }
+
     .label {
       margin-top: 5px;
-      font-size: 11px;
+
+      font-size: 10px;
+
       text-transform: uppercase;
-      letter-spacing: .18em;
-      opacity: .52;
+
+      letter-spacing: 0.18em;
+
+      opacity: 0.5;
     }
-    .date {
-      font-size: 14px;
-      opacity: .55;
-      margin-bottom: 28px;
-    }
+
     .message {
       display: inline-block;
-      padding: 13px 20px;
+
+      padding: 12px 20px;
+
       border-radius: 999px;
-      background: rgba(255,159,189,.11);
-      border: 1px solid rgba(255,159,189,.18);
+
+      background: rgba(255, 159, 189, 0.09);
+
+      border: 1px solid rgba(255, 159, 189, 0.16);
+
       color: #ffc2d5;
+
       font-size: 14px;
     }
-    .footer {
-      margin-top: 28px;
-      font-size: 11px;
-      opacity: .35;
-      letter-spacing: .08em;
+
+    /* =========================
+       FİNAL EKRANI
+       ========================= */
+
+    .final-screen {
+      display: none;
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 20;
+
+      place-items: center;
+
+      text-align: center;
+
+      padding: 25px;
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(255, 70, 125, 0.20),
+          transparent 40%
+        ),
+        linear-gradient(
+          145deg,
+          #180812,
+          #2a0b1c,
+          #10060e
+        );
     }
+
+    .final-content {
+      position: relative;
+
+      z-index: 30;
+
+      animation: finalAppear 1.4s ease both;
+    }
+
+    @keyframes finalAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.80) translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .final-heart {
+      font-size: 78px;
+
+      filter:
+        drop-shadow(
+          0 0 22px rgba(255, 80, 130, 0.7)
+        );
+
+      animation: heartbeat 1.2s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      15% {
+        transform: scale(1.18);
+      }
+
+      30% {
+        transform: scale(1);
+      }
+
+      45% {
+        transform: scale(1.12);
+      }
+    }
+
+    .final-small {
+      margin-top: 15px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.3em;
+
+      font-size: 12px;
+
+      opacity: 0.6;
+    }
+
+    .final-title {
+      margin: 12px 0 14px;
+
+      font-family: Georgia, "Times New Roman", serif;
+
+      font-size: clamp(42px, 9vw, 88px);
+
+      font-weight: 500;
+
+      color: #ffabc4;
+
+      text-shadow:
+        0 0 30px rgba(255, 100, 150, 0.35);
+    }
+
+    .final-message {
+      font-size: clamp(17px, 3vw, 22px);
+
+      line-height: 1.7;
+
+      opacity: 0.9;
+    }
+
+    /* KONFETİ */
+
+    .confetti {
+      position: absolute;
+
+      inset: -20%;
+
+      pointer-events: none;
+
+      background-image:
+        radial-gradient(
+          circle,
+          #ff6d9d 0 4px,
+          transparent 5px
+        ),
+        radial-gradient(
+          circle,
+          #ffd166 0 4px,
+          transparent 5px
+        ),
+        radial-gradient(
+          circle,
+          #9b7bff 0 4px,
+          transparent 5px
+        ),
+        radial-gradient(
+          circle,
+          #ffffff 0 3px,
+          transparent 4px
+        );
+
+      background-size:
+        90px 120px,
+        130px 100px,
+        110px 150px,
+        75px 95px;
+
+      animation: confettiFall 7s linear infinite;
+
+      opacity: 0.8;
+    }
+
+    @keyframes confettiFall {
+      from {
+        transform: translateY(-15%);
+      }
+
+      to {
+        transform: translateY(30%);
+      }
+    }
+
+    /* FİNALDE UÇAN KALPLER */
+
+    .floating-heart {
+      position: absolute;
+
+      font-size: 32px;
+
+      animation: finalHeartFloat 5s ease-in infinite;
+
+      opacity: 0;
+    }
+
+    @keyframes finalHeartFloat {
+      0% {
+        transform:
+          translateY(30vh)
+          scale(0.5);
+
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 0.85;
+      }
+
+      100% {
+        transform:
+          translateY(-90vh)
+          scale(1.3);
+
+        opacity: 0;
+      }
+    }
+
+    /* MOBİL */
+
     @media (max-width: 600px) {
-      .card { padding: 42px 16px 32px; border-radius: 25px; }
-      .countdown { gap: 7px; }
-      .unit { padding: 17px 5px; border-radius: 15px; }
-      .label { letter-spacing: .08em; font-size: 9px; }
-    }
-    @media (max-width: 390px) {
-      .number { font-size: 28px; }
+
+      .card {
+        padding: 34px 14px 28px;
+
+        border-radius: 24px;
+      }
+
+      .countdown {
+        gap: 6px;
+      }
+
+      .time-box {
+        padding: 17px 4px;
+
+        border-radius: 14px;
+      }
+
+      .label {
+        font-size: 8px;
+
+        letter-spacing: 0.08em;
+      }
+
+      .final-title {
+        line-height: 1.1;
+      }
     }
   </style>
 </head>
-<body>
-  <div class="stars"></div>
-  <main class="container">
-    <section class="card">
-      <div class="heart">❤️</div>
-      <div class="eyebrow">Buluşmaya kalan süre</div>
-      <h1><span>Ezgi</span> ne zaman dönüyor?</h1>
-      <p class="subtitle">
-        Kavuşmaya çok az kaldı. Bu sayaç, 29 Ağustos 2026 saat 12:00'ye
-        kadar her saniye geri sayıyor.
-      </p>
 
-      <div class="countdown" aria-label="Geri sayım">
-        <div class="unit"><div class="number" id="days">00</div><div class="label">Gün</div></div>
-        <div class="unit"><div class="number" id="hours">00</div><div class="label">Saat</div></div>
-        <div class="unit"><div class="number" id="minutes">00</div><div class="label">Dakika</div></div>
-        <div class="unit"><div class="number" id="seconds">00</div><div class="label">Saniye</div></div>
+<body>
+
+  <!-- ARKA PLAN KALPLERİ -->
+
+  <div class="background-hearts" id="backgroundHearts"></div>
+
+
+  <!-- GERİ SAYIM EKRANI -->
+
+  <main class="countdown-screen" id="countdownScreen">
+
+    <section class="card">
+
+      <div class="top-heart">
+        ❤️
       </div>
 
-      <div class="date">29 Ağustos 2026 · 23:00</div>
-      <div class="message" id="message">Az kaldıııııııı</div>
-      <div class="footer">sadece ikiniz için</div>
+      <div class="eyebrow">
+        Buluşmaya kalan süre
+      </div>
+
+      <h1>
+        <span>Ezgi</span> ne zaman dönüyor?
+      </h1>
+
+      <p class="subtitle">
+        Kavuşmamıza çok az kaldı sevgilimmmm
+      </p>
+
+      <div class="target-date">
+        📅 29 Ağustos 2026 &nbsp;•&nbsp; 🕚 23:00
+      </div>
+
+
+      <!-- SAYAÇ -->
+
+      <div class="countdown">
+
+        <div class="time-box">
+          <div class="number" id="days">
+            00
+          </div>
+
+          <div class="label">
+            Gün
+          </div>
+        </div>
+
+
+        <div class="time-box">
+          <div class="number" id="hours">
+            00
+          </div>
+
+          <div class="label">
+            Saat
+          </div>
+        </div>
+
+
+        <div class="time-box">
+          <div class="number" id="minutes">
+            00
+          </div>
+
+          <div class="label">
+            Dakika
+          </div>
+        </div>
+
+
+        <div class="time-box">
+          <div class="number" id="seconds">
+            00
+          </div>
+
+          <div class="label">
+            Saniye
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="message">
+        Az kaldı... ❤️
+      </div>
+
     </section>
+
   </main>
 
+
+
+  <!-- FİNAL EKRANI -->
+
+  <section class="final-screen" id="finalScreen">
+
+    <!-- KONFETİ -->
+
+    <div class="confetti"></div>
+
+
+    <!-- ANA MESAJ -->
+
+    <div class="final-content">
+
+      <div class="final-heart">
+        ❤️
+      </div>
+
+      <div class="final-small">
+        Beklediğin an geldi
+      </div>
+
+      <div class="final-title">
+        Hoş geldin sevgilim!
+      </div>
+
+      <div class="final-message">
+
+        Seni çok bekledim. ❤️
+        <br>
+
+        İyi ki varsın, iyi ki benimlesin.
+        <br>
+
+        <strong>
+          EZGİ DÖNDÜ! 🥰
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- UÇAN KALPLER -->
+
+    <span
+      class="floating-heart"
+      style="left: 8%; animation-delay: 0.2s;"
+    >
+      ❤️
+    </span>
+
+    <span
+      class="floating-heart"
+      style="left: 22%; animation-delay: 1.4s;"
+    >
+      💗
+    </span>
+
+    <span
+      class="floating-heart"
+      style="left: 38%; animation-delay: 2.5s;"
+    >
+      💕
+    </span>
+
+    <span
+      class="floating-heart"
+      style="left: 58%; animation-delay: 0.8s;"
+    >
+      ❤️
+    </span>
+
+    <span
+      class="floating-heart"
+      style="left: 74%; animation-delay: 2s;"
+    >
+      💖
+    </span>
+
+    <span
+      class="floating-heart"
+      style="left: 90%; animation-delay: 3s;"
+    >
+      ❤️
+    </span>
+
+  </section>
+
+
+
   <script>
-    // Hedef: 28 Ağustos 2026, saat 12:00 (Türkiye saati)
-    const target = new Date("2026-08-29T12:00:00+03:00").getTime();
 
-    const $ = id => document.getElementById(id);
-    const pad = n => String(n).padStart(2, "0");
+    /*
+      ==========================================
+      HEDEF TARİH
+      ==========================================
 
-    function updateCountdown() {
-      const diff = target - Date.now();
+      29 Ağustos 2026
+      Saat: 23:00
+      Türkiye saati (UTC+3)
+    */
 
-      if (diff <= 0) {
-        $("days").textContent = "00";
-        $("hours").textContent = "00";
-        $("minutes").textContent = "00";
-        $("seconds").textContent = "00";
-        $("message").textContent = "EZGİ DÖNDÜ! ❤️";
-        return;
-      }
+    const targetDate =
+      new Date("2026-08-29T23:00:00+03:00").getTime();
 
-      const totalSeconds = Math.floor(diff / 1000);
-      const days = Math.floor(totalSeconds / 86400);
-      const hours = Math.floor((totalSeconds % 86400) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
 
-      $("days").textContent = pad(days);
-      $("hours").textContent = pad(hours);
-      $("minutes").textContent = pad(minutes);
-      $("seconds").textContent = pad(seconds);
+    /*
+      HTML ELEMENTLERİ
+    */
+
+    const daysElement =
+      document.getElementById("days");
+
+    const hoursElement =
+      document.getElementById("hours");
+
+    const minutesElement =
+      document.getElementById("minutes");
+
+    const secondsElement =
+      document.getElementById("seconds");
+
+    const countdownScreen =
+      document.getElementById("countdownScreen");
+
+    const finalScreen =
+      document.getElementById("finalScreen");
+
+
+    /*
+      SAYILARI 2 HANELİ GÖSTER
+    */
+
+    function pad(number) {
+
+      return String(number).padStart(2, "0");
+
     }
 
+
+    /*
+      FİNAL EKRANINI GÖSTER
+    */
+
+    function showFinalScreen() {
+
+      countdownScreen.style.display = "none";
+
+      finalScreen.style.display = "grid";
+
+      document.title =
+        "Hoş geldin sevgilim! ❤️";
+
+    }
+
+
+    /*
+      GERİ SAYIM
+    */
+
+    function updateCountdown() {
+
+      const difference =
+        targetDate - Date.now();
+
+
+      /*
+        SÜRE DOLDUYSA
+      */
+
+      if (difference <= 0) {
+
+        showFinalScreen();
+
+        return;
+
+      }
+
+
+      /*
+        KALAN SÜREYİ SANİYEYE ÇEVİR
+      */
+
+      const totalSeconds =
+        Math.floor(difference / 1000);
+
+
+      /*
+        GÜN
+      */
+
+      const days =
+        Math.floor(totalSeconds / 86400);
+
+
+      /*
+        SAAT
+      */
+
+      const hours =
+        Math.floor(
+          (totalSeconds % 86400) / 3600
+        );
+
+
+      /*
+        DAKİKA
+      */
+
+      const minutes =
+        Math.floor(
+          (totalSeconds % 3600) / 60
+        );
+
+
+      /*
+        SANİYE
+      */
+
+      const seconds =
+        totalSeconds % 60;
+
+
+      /*
+        EKRANA YAZ
+      */
+
+      daysElement.textContent =
+        pad(days);
+
+      hoursElement.textContent =
+        pad(hours);
+
+      minutesElement.textContent =
+        pad(minutes);
+
+      secondsElement.textContent =
+        pad(seconds);
+
+    }
+
+
+    /*
+      ARKA PLANA KALPLER EKLE
+    */
+
+    const background =
+      document.getElementById("backgroundHearts");
+
+
+    for (let i = 0; i < 22; i++) {
+
+      const heart =
+        document.createElement("span");
+
+
+      heart.textContent =
+        ["♥️", "♡", "❤️"][
+          Math.floor(
+            Math.random() * 3
+          )
+        ];
+
+
+      heart.style.left =
+        Math.random() * 100 + "%";
+
+
+      heart.style.fontSize =
+        12 + Math.random() * 20 + "px";
+
+
+      heart.style.animationDuration =
+        7 + Math.random() * 9 + "s";
+
+
+      heart.style.animationDelay =
+        -Math.random() * 12 + "s";
+
+
+      background.appendChild(heart);
+
+    }
+
+
+    /*
+      SAYACI BAŞLAT
+    */
+
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+
+    setInterval(
+      updateCountdown,
+      1000
+    );
+
   </script>
+
 </body>
 </html>
